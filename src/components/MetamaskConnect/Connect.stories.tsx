@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { storiesOf } from "@storybook/react";
 
-import Button from "./Connect";
+import Connect from "./Connect";
 
 const stories = storiesOf("MetamaskConnect", module);
+
+stories.add("Connect", () => <Connect />);
