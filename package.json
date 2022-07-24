@@ -12,6 +12,9 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.18.9",
+    "@metamask/detect-provider": "^1.2.0",
+    "@metamask/onboarding": "^1.0.1",
+    "@metamask/providers": "^9.0.0",
     "@storybook/addon-actions": "^6.5.9",
     "@storybook/addon-essentials": "^6.5.9",
     "@storybook/addon-interactions": "^6.5.9",
