@@ -1,8 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import detectEthereumProvider from "@metamask/detect-provider";
 import MetaMaskOnboarding from "@metamask/onboarding";
-import { MetaMaskInpageProvider } from "@metamask/providers";
 declare var window: any;
 const { ethereum } = window;
 
@@ -11,9 +9,6 @@ const Connect = () => {
   const [chainId, setChainId] = useState(null);
   const [walletAddress, setWalletAddress] = useState(null);
   const [walletBalance, setWalletBalance] = useState(0);
-  // useEffect(() => {
-  //   MetamaskConnection();
-  // }, []);
   async function MetamaskConnection() {
     if (ethereum && ethereum.isMetaMask) {
       console.log("chain ID", ethereum.networkVersion);
@@ -24,6 +19,7 @@ const Connect = () => {
       });
       console.log("Wallet Address", newAccounts);
       setWalletAddress(newAccounts[0]);
+      setIsConnected(true);
 
       try {
         const chainId = await ethereum.request({
@@ -44,8 +40,32 @@ const Connect = () => {
 
   return (
     <div>
-      <button onClick={MetamaskConnection}>Connect</button>
-      {isConnected ? <p>Connected</p> : <p>Not Connected</p>}
+      {isConnected ? (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            background: "linear-gradient(navy, black)",
+            color: "cyan",
+            border: "1px solid yellow",
+            padding: "10px",
+            margin: "10px",
+            borderRadius: "10px",
+            fontFamily: "sans-serif",
+          }}
+        >
+          <h1 style={{ border: "2px solid red", padding: "10px" }}>
+            Connected
+          </h1>
+          <h2>Chain ID: {chainId}</h2>
+          <h2>Wallet Address: {walletAddress}</h2>
+          <h2>Wallet Balance: {walletBalance}</h2>
+        </div>
+      ) : (
+        <button onClick={MetamaskConnection}>Connect</button>
+      )}
     </div>
   );
 };
